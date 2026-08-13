@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5b21b6">
+<title>حاسبة أيام التبويض | Alloinfirmiere الطب البسيط</title>
+<style>
+:root{--p:#6d28d9;--p2:#8b5cf6;--ink:#28143f;--muted:#6e6280;--bg:#f5f0ff;--line:#e5d9ff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:linear-gradient(160deg,#fbf9ff,#eee6ff);color:var(--ink)}
+main{width:min(760px,94%);margin:18px auto 36px}.hero{background:linear-gradient(135deg,#4c1d95,#7c3aed 60%,#a78bfa);color:#fff;border-radius:26px;padding:24px;box-shadow:0 16px 38px #4c1d9533}
+h1{margin:0 0 8px;font-size:clamp(27px,7vw,43px)}.hero p{margin:0;line-height:1.7}.brand{display:inline-block;margin-top:13px;padding:7px 12px;border-radius:99px;background:#ffffff20;border:1px solid #ffffff35;font-weight:bold}
+.card{margin-top:16px;background:#fffffff2;border:1px solid #ffffff;border-radius:24px;padding:20px;box-shadow:0 12px 30px #3b17641a}
+label{display:block;font-weight:bold;margin:14px 0 7px}input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:13px;background:#fff;font-size:17px}
+button{width:100%;padding:14px;border:0;border-radius:14px;font-weight:bold;font-size:17px;cursor:pointer}.primary{margin-top:18px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}
+.secondary{margin-top:10px;background:#f0e9ff;color:#5b21b6}.err{display:none;margin-top:12px;padding:11px;border-radius:11px;background:#fff1f2;color:#b91c1c}
+#result{display:none;margin-top:20px}.headline{text-align:center;margin:5px 0 14px}.headline strong{font-size:21px;color:#5b21b6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{background:#faf8ff;border:1px solid var(--line);border-radius:16px;padding:15px}.item .t{font-weight:bold}.value{margin-top:7px;color:#5b21b6;font-weight:bold;line-height:1.55}
+.calendar{margin-top:16px;border:1px solid var(--line);border-radius:17px;padding:13px;background:#fff}.cal-title{text-align:center;font-weight:bold;margin-bottom:10px}.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.week div{text-align:center;font-size:12px;color:var(--muted)}
+.day{min-height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#f7f4fb;font-weight:bold}.empty{background:transparent}.fertile{background:#e9dcff}.ovulation{background:#6d28d9;color:white;box-shadow:0 5px 13px #6d28d944}.period{outline:2px solid #f1a7b8}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--muted)}.dot{display:inline-block;width:11px;height:11px;border-radius:4px;margin-left:4px;vertical-align:-1px}.d1{background:#e9dcff}.d2{background:#6d28d9}.d3{border:2px solid #f1a7b8}
+.note{margin-top:15px;padding:13px;border-radius:13px;background:#fff7ed;color:#7c2d12;line-height:1.7;font-size:14px}.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:16px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.hero,.card{border-radius:20px}.day{min-height:39px;font-size:13px}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+<h1>🥚 حاسبة أيام التبويض</h1>
+<p>احسبي موعد التبويض المتوقع، نافذة الخصوبة وأعلى أيام احتمال الحمل.</p>
+<div class="brand">Alloinfirmiere الطب البسيط</div>
+</section>
+
+<section class="card">
+<label for="last">🩸 أول يوم من آخر دورة</label>
+<input id="last" type="date">
+<label for="length">📅 متوسط طول الدورة بالأيام</label>
+<input id="length" type="number" min="21" max="40" value="28">
+<button class="primary" id="calc">احسبي الآن ✨</button>
+<div class="err" id="err"></div>
+
+<div id="result">
+<div class="headline"><strong>💜 نتيجتك التقديرية</strong></div>
+<div class="grid">
+<div class="item"><div class="t">🥚 التبويض المتوقع</div><div class="value" id="ovu"></div></div>
+<div class="item"><div class="t">🌸 نافذة الخصوبة</div><div class="value" id="fertile"></div></div>
+<div class="item"><div class="t">❤️ أعلى فرصة للحمل</div><div class="value" id="best"></div></div>
+<div class="item"><div class="t">🩸 الدورة القادمة المتوقعة</div><div class="value" id="next"></div></div>
+</div>
+
+<div class="calendar">
+<div class="cal-title" id="monthTitle"></div>
+<div class="week"><div>أحد</div><div>إثن</div><div>ثلا</div><div>أرب</div><div>خمي</div><div>جمع</div><div>سبت</div></div>
+<div class="days" id="days"></div>
+<div class="legend">
+<span><i class="dot d1"></i> نافذة الخصوبة</span>
+<span><i class="dot d2"></i> يوم التبويض</span>
+<span><i class="dot d3"></i> بداية الدورة</span>
+</div>
+</div>
+
+<button class="secondary" id="again">🔄 حساب جديد</button>
+<div class="note">⚠️ الحساب تقريبي ويعتمد على انتظام الدورة. التبويض قد يتغير من شهر لآخر، لذلك لا تُستعمل هذه الحاسبة وحدها كوسيلة لمنع الحمل أو لتشخيص مشاكل الخصوبة.</div>
+</div>
+</section>
+<div class="footer">أداة توعوية • Alloinfirmiere الطب البسيط</div>
+</main>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+function add(d,n){let x=new Date(d);x.setDate(x.getDate()+n);return x}
+function key(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function fmt(d){return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear()}
+function renderCalendar(base, start, ov, end){
+  const first=new Date(ov.getFullYear(),ov.getMonth(),1,12), last=new Date(ov.getFullYear(),ov.getMonth()+1,0,12);
+  $("monthTitle").textContent=ov.toLocaleDateString("ar-MA",{month:"long",year:"numeric"});
+  $("days").innerHTML="";
+  for(let i=0;i<first.getDay();i++){let e=document.createElement("div");e.className="day empty";$("days").appendChild(e)}
+  for(let n=1;n<=last.getDate();n++){
+    let d=new Date(ov.getFullYear(),ov.getMonth(),n,12), el=document.createElement("div");el.className="day";el.textContent=n;
+    if(d>=start&&d<=end)el.classList.add("fertile");
+    if(key(d)===key(ov))el.classList.add("ovulation");
+    if(key(d)===key(base))el.classList.add("period");
+    $("days").appendChild(el);
+  }
+}
+$("calc").onclick=function(){
+  const raw=$("last").value, cycle=parseInt($("length").value,10);
+  $("err").style.display="none";$("result").style.display="none";
+  if(!raw){$("err").textContent="من فضلك اختاري أول يوم من آخر دورة.";$("err").style.display="block";return}
+  if(isNaN(cycle)||cycle<21||cycle>40){$("err").textContent="متوسط طول الدورة خاصو يكون بين 21 و40 يوم.";$("err").style.display="block";return}
+  const a=raw.split("-"), base=new Date(+a[0],+a[1]-1,+a[2],12), next=add(base,cycle), ov=add(next,-14), fs=add(ov,-5), fe=add(ov,1), bs=add(ov,-2);
+  $("ovu").textContent=fmt(ov);$("fertile").textContent=fmt(fs)+" إلى "+fmt(fe);$("best").textContent=fmt(bs)+" إلى "+fmt(ov);$("next").textContent=fmt(next);
+  renderCalendar(base,fs,ov,fe);$("result").style.display="block";$("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+$("again").onclick=function(){$("result").style.display="none";$("last").focus();window.scrollTo({top:0,behavior:"smooth"})}
+})();
+</script>
+</body>
+</html>
