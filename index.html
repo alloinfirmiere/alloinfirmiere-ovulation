@@ -6,300 +6,98 @@
 <meta name="theme-color" content="#6d28d9">
 <title>حاسبة أيام التبويض | Alloinfirmiere الطب البسيط</title>
 <style>
-:root{
-  --p:#6d28d9; --p2:#8b5cf6; --p3:#ede9fe;
-  --ink:#2b193d; --muted:#72657d; --bg:#f6f1ff;
-  --line:#e6ddf3; --warn:#fff7ed; --warnink:#8a3f16;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:linear-gradient(160deg,#fbf9ff 0%,#f1eaff 100%);
-  color:var(--ink);
-}
-main{width:min(760px,94%);margin:18px auto 36px}
-.hero{
-  background:linear-gradient(135deg,#4c1d95,#6d28d9 55%,#a78bfa);
-  color:white;border-radius:26px;padding:24px;
-  box-shadow:0 16px 38px rgba(76,29,149,.22);
-}
-h1{margin:0 0 8px;font-size:clamp(28px,7vw,44px)}
-.hero p{margin:0;line-height:1.8}
-.brand{
-  display:inline-block;margin-top:13px;padding:7px 12px;border-radius:99px;
-  background:#ffffff20;border:1px solid #ffffff35;font-weight:bold;
-}
-.card{
-  margin-top:16px;background:rgba(255,255,255,.96);border:1px solid white;
-  border-radius:24px;padding:20px;box-shadow:0 12px 30px rgba(59,23,100,.08)
-}
-label{display:block;font-weight:bold;margin:14px 0 7px}
-input{
-  width:100%;padding:14px;border:1.5px solid var(--line);
-  border-radius:13px;background:white;font-size:17px;
-}
-button{
-  width:100%;padding:14px;border:0;border-radius:14px;
-  font-weight:bold;font-size:17px;cursor:pointer
-}
-.primary{margin-top:18px;background:linear-gradient(135deg,var(--p),var(--p2));color:white}
-.secondary{margin-top:10px;background:#f0e9ff;color:#5b21b6}
-.share{margin-top:10px;background:white;color:#5b21b6;border:1.5px solid #d9c9ff}
-.err{
-  display:none;margin-top:12px;padding:11px;border-radius:11px;
-  background:#fff1f2;color:#b91c1c
-}
-#result{display:none;margin-top:20px}
-.headline{text-align:center;margin:5px 0 14px}
-.headline strong{font-size:23px;color:#5b21b6}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.item{
-  background:#faf8ff;border:1px solid var(--line);
-  border-radius:16px;padding:15px
-}
-.item .t{font-weight:bold}
-.value{margin-top:8px;color:#5b21b6;font-weight:bold;line-height:1.65}
-.date-line{
-  direction:ltr; unicode-bidi:isolate; text-align:center;
-  display:block; font-variant-numeric:tabular-nums;
-}
-.calendar{
-  margin-top:16px;border:1px solid var(--line);border-radius:17px;
-  padding:13px;background:white
-}
-.cal-title{text-align:center;font-weight:bold;margin-bottom:10px;font-size:18px}
-.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-.week div{text-align:center;font-size:12px;color:var(--muted)}
-.day{
-  min-height:44px;border-radius:10px;display:flex;align-items:center;
-  justify-content:center;background:#f7f4fb;font-weight:bold
-}
-.empty{background:transparent}
-.fertile{background:#e9dcff}
-.ovulation{background:var(--p);color:white;box-shadow:0 5px 13px rgba(109,40,217,.26)}
-.period{outline:2px solid #f1a7b8}
-.legend{
-  display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;
-  font-size:12px;color:var(--muted)
-}
-.dot{display:inline-block;width:11px;height:11px;border-radius:4px;margin-left:4px;vertical-align:-1px}
-.d1{background:#e9dcff}.d2{background:var(--p)}.d3{border:2px solid #f1a7b8}
-.info{
-  margin-top:15px;padding:13px;border-radius:13px;background:#f8f5ff;
-  color:#513b6e;line-height:1.8;font-size:14px;border:1px solid #e8def8
-}
-.note{
-  margin-top:12px;padding:13px;border-radius:13px;background:var(--warn);
-  color:var(--warnink);line-height:1.8;font-size:14px
-}
-.privacy{
-  margin-top:10px;text-align:center;color:var(--muted);
-  font-size:12px;line-height:1.7
-}
-.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:16px}
-.toast{
-  position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
-  background:#24143f;color:white;padding:11px 15px;border-radius:999px;
-  display:none;z-index:99;font-size:14px
-}
-@media(max-width:560px){
-  .grid{grid-template-columns:1fr}
-  .hero,.card{border-radius:20px}
-  .day{min-height:39px;font-size:13px}
-}
+:root{--p:#6d28d9;--p2:#8b5cf6;--ink:#2b193d;--muted:#756a82;--line:#e8def5;--soft:#faf7ff;--warn:#fff7ed;--warnink:#8a3f16}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;color:var(--ink);background:linear-gradient(160deg,#fcfaff 0%,#f0e9ff 100%)}
+main{width:min(760px,94%);margin:18px auto 36px}.hero{background:linear-gradient(135deg,#4c1d95,#6d28d9 58%,#a78bfa);color:#fff;border-radius:26px;padding:24px;box-shadow:0 16px 38px rgba(76,29,149,.22)}
+h1{margin:0 0 8px;font-size:clamp(28px,7vw,44px)}.hero p{margin:0;line-height:1.8}.brand{display:inline-block;margin-top:13px;padding:7px 12px;border-radius:99px;background:#ffffff20;border:1px solid #ffffff35;font-weight:bold}
+.card{margin-top:16px;background:#fffffff2;border:1px solid #fff;border-radius:24px;padding:20px;box-shadow:0 12px 30px rgba(59,23,100,.08)}
+label{display:block;font-weight:800;margin:15px 0 8px}input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:13px;background:#fff;font-size:17px}
+.segment{display:grid;grid-template-columns:1fr 1fr;gap:9px}.choice{border:1.5px solid var(--line);background:#fff;padding:13px;border-radius:13px;font-weight:800;color:#5a486d;cursor:pointer}
+.choice.active{background:#efe7ff;border-color:#8b5cf6;color:#5b21b6;box-shadow:0 0 0 3px rgba(139,92,246,.08)}
+button{width:100%;padding:14px;border:0;border-radius:14px;font-weight:800;font-size:17px;cursor:pointer}.primary{margin-top:18px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}
+.secondary{margin-top:10px;background:#f0e9ff;color:#5b21b6}.share{margin-top:10px;background:#fff;color:#5b21b6;border:1.5px solid #d9c9ff}
+.err{display:none;margin-top:12px;padding:11px;border-radius:11px;background:#fff1f2;color:#b91c1c}#result{display:none;margin-top:20px}.headline{text-align:center;margin:4px 0 14px}.headline strong{font-size:23px;color:#5b21b6}
+.status{margin-bottom:13px;padding:12px 14px;border-radius:13px;line-height:1.7;font-size:14px}.status.good{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}.status.caution{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+.goalbox{margin-bottom:13px;padding:12px 14px;border-radius:13px;background:#f8f5ff;border:1px solid #e9def9;color:#513b6e;line-height:1.7;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:15px}.item .t{font-weight:800}.value{margin-top:8px;color:#5b21b6;font-weight:800;line-height:1.65}
+.date-line{direction:ltr;unicode-bidi:isolate;text-align:center;display:block;font-variant-numeric:tabular-nums}
+.calendar{margin-top:16px;border:1px solid var(--line);border-radius:17px;padding:13px;background:#fff}.cal-title{text-align:center;font-weight:800;margin-bottom:10px;font-size:18px}
+.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.week div{text-align:center;font-size:12px;color:var(--muted)}.day{min-height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#f7f4fb;font-weight:800}
+.empty{background:transparent}.fertile{background:#e9dcff}.ovulation{background:var(--p);color:#fff;box-shadow:0 5px 13px rgba(109,40,217,.26)}.period{outline:2px solid #f1a7b8}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--muted)}.dot{display:inline-block;width:11px;height:11px;border-radius:4px;margin-left:4px;vertical-align:-1px}.d1{background:#e9dcff}.d2{background:var(--p)}.d3{border:2px solid #f1a7b8}
+.info{margin-top:15px;padding:13px;border-radius:13px;background:#f8f5ff;color:#513b6e;line-height:1.8;font-size:14px;border:1px solid #e8def8}.note{margin-top:12px;padding:13px;border-radius:13px;background:var(--warn);color:var(--warnink);line-height:1.8;font-size:14px}
+.privacy{margin-top:10px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:16px}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#24143f;color:#fff;padding:11px 15px;border-radius:999px;display:none;z-index:99;font-size:14px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.hero,.card{border-radius:20px}.day{min-height:39px;font-size:13px}}
 </style>
 </head>
 <body>
 <main>
 <section class="hero">
-  <h1>🥚 حاسبة أيام التبويض</h1>
-  <p>احسبي موعد التبويض المتوقع، نافذة الخصوبة وأعلى أيام احتمال الحمل.</p>
-  <div class="brand">Alloinfirmiere الطب البسيط</div>
+<h1>🥚 حاسبة أيام التبويض</h1>
+<p>احسبي موعد التبويض المتوقع، نافذة الخصوبة وأعلى أيام احتمال الحمل بطريقة أوضح وأذكى.</p>
+<div class="brand">Alloinfirmiere الطب البسيط</div>
 </section>
-
 <section class="card">
-  <label for="last">🩸 أول يوم من آخر دورة</label>
-  <input id="last" type="date">
-
-  <label for="length">📅 متوسط طول الدورة بالأيام</label>
-  <input id="length" type="number" min="21" max="40" value="28">
-
-  <button class="primary" id="calc">احسبي الآن ✨</button>
-  <div class="err" id="err"></div>
-
-  <div id="result">
-    <div class="headline"><strong>💜 نتيجتك التقديرية</strong></div>
-
-    <div class="grid">
-      <div class="item">
-        <div class="t">🥚 التبويض المتوقع</div>
-        <div class="value"><span class="date-line" id="ovu"></span></div>
-      </div>
-
-      <div class="item">
-        <div class="t">🌸 نافذة الخصوبة التقديرية</div>
-        <div class="value"><span class="date-line" id="fertile"></span></div>
-      </div>
-
-      <div class="item">
-        <div class="t">❤️ أعلى فرصة للحمل</div>
-        <div class="value"><span class="date-line" id="best"></span></div>
-      </div>
-
-      <div class="item">
-        <div class="t">🩸 الدورة القادمة المتوقعة</div>
-        <div class="value"><span class="date-line" id="next"></span></div>
-      </div>
-    </div>
-
-    <div class="calendar">
-      <div class="cal-title" id="monthTitle"></div>
-      <div class="week">
-        <div>أحد</div><div>إثن</div><div>ثلا</div><div>أرب</div><div>خمي</div><div>جمع</div><div>سبت</div>
-      </div>
-      <div class="days" id="days"></div>
-      <div class="legend">
-        <span><i class="dot d1"></i> نافذة الخصوبة</span>
-        <span><i class="dot d2"></i> يوم التبويض</span>
-        <span><i class="dot d3"></i> بداية الدورة</span>
-      </div>
-    </div>
-
-    <div class="info">
-      💡 التبويض لا يقع دائماً في نفس اليوم. هذا الحساب يفترض تقريباً أن التبويض يحدث قبل الدورة التالية بنحو 14 يوماً، وقد يختلف فعلياً من دورة لأخرى.
-    </div>
-
-    <button class="share" id="share">📤 مشاركة رابط الحاسبة</button>
-    <button class="secondary" id="again">🔄 حساب جديد</button>
-
-    <div class="note">
-      ⚠️ هذه الحاسبة تعطي تقديراً فقط، خصوصاً إذا كانت الدورة غير منتظمة. لا تُستخدم وحدها كوسيلة لمنع الحمل أو لتشخيص مشاكل الخصوبة.
-    </div>
-
-    <div class="privacy">
-      🔐 عند مشاركة الحاسبة، تتم مشاركة رابط الصفحة فقط، وليس تاريخ الدورة أو النتيجة التي أدخلتها.
-    </div>
-  </div>
+<label for="last">🩸 أول يوم من آخر دورة</label>
+<input id="last" type="date">
+<label for="length">📅 متوسط طول الدورة بالأيام</label>
+<input id="length" type="number" min="21" max="40" value="28">
+<label>🔁 واش الدورة ديالك منتظمة غالباً؟</label>
+<div class="segment"><button type="button" class="choice" id="regularYes">نعم</button><button type="button" class="choice" id="regularNo">لا</button></div>
+<label>🎯 شنو الهدف ديالك؟</label>
+<div class="segment"><button type="button" class="choice" id="goalPregnancy">محاولة الحمل 🤰</button><button type="button" class="choice" id="goalTracking">تتبع الخصوبة 📅</button></div>
+<button class="primary" id="calc">احسبي الآن ✨</button>
+<div class="err" id="err"></div>
+<div id="result">
+<div class="headline"><strong>💜 نتيجتك التقديرية</strong></div>
+<div id="regularityStatus" class="status"></div>
+<div id="goalStatus" class="goalbox"></div>
+<div class="grid">
+<div class="item"><div class="t">🥚 التبويض المتوقع</div><div class="value"><span class="date-line" id="ovu"></span></div></div>
+<div class="item"><div class="t">🌸 نافذة الخصوبة التقديرية</div><div class="value"><span class="date-line" id="fertile"></span></div></div>
+<div class="item"><div class="t">❤️ أعلى فرصة للحمل</div><div class="value"><span class="date-line" id="best"></span></div></div>
+<div class="item"><div class="t">🩸 الدورة القادمة المتوقعة</div><div class="value"><span class="date-line" id="next"></span></div></div>
+</div>
+<div class="calendar">
+<div class="cal-title" id="monthTitle"></div>
+<div class="week"><div>أحد</div><div>إثن</div><div>ثلا</div><div>أرب</div><div>خمي</div><div>جمع</div><div>سبت</div></div>
+<div class="days" id="days"></div>
+<div class="legend"><span><i class="dot d1"></i> نافذة الخصوبة</span><span><i class="dot d2"></i> يوم التبويض</span><span><i class="dot d3"></i> بداية الدورة</span></div>
+</div>
+<div class="info">💡 هذا الحساب تقديري ويعتمد على متوسط طول الدورة. التبويض قد يتقدم أو يتأخر من شهر لآخر حتى عند بعض النساء ذوات الدورة المنتظمة.</div>
+<button class="share" id="share">📤 مشاركة رابط الحاسبة</button>
+<button class="secondary" id="again">🔄 حساب جديد</button>
+<div class="note">⚠️ لا تُستخدم هذه الحاسبة وحدها كوسيلة لمنع الحمل أو لتشخيص مشاكل الخصوبة. إذا كانت الدورة غير منتظمة بشكل متكرر، فالحساب بالتقويم يكون أقل دقة.</div>
+<div class="privacy">🔐 مشاركة الحاسبة ترسل رابط الصفحة فقط، ولا تشارك تاريخ الدورة أو النتيجة التي أدخلتها.</div>
+</div>
 </section>
-
 <div class="footer">أداة توعوية • Alloinfirmiere الطب البسيط</div>
 </main>
-
 <div class="toast" id="toast">تم نسخ رابط الحاسبة ✅</div>
-
 <script>
 (function(){
-const $=id=>document.getElementById(id);
-
-function add(d,n){
-  let x=new Date(d);
-  x.setDate(x.getDate()+n);
-  return x;
-}
-
-function key(d){
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-}
-
-function fmt(d){
-  return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear();
-}
-
-function renderCalendar(base,start,ov,end){
-  const first=new Date(ov.getFullYear(),ov.getMonth(),1,12);
-  const last=new Date(ov.getFullYear(),ov.getMonth()+1,0,12);
-
-  $("monthTitle").textContent=ov.toLocaleDateString("ar-MA",{month:"long",year:"numeric"});
-  $("days").innerHTML="";
-
-  for(let i=0;i<first.getDay();i++){
-    let e=document.createElement("div");
-    e.className="day empty";
-    $("days").appendChild(e);
-  }
-
-  for(let n=1;n<=last.getDate();n++){
-    let d=new Date(ov.getFullYear(),ov.getMonth(),n,12);
-    let el=document.createElement("div");
-    el.className="day";
-    el.textContent=n;
-
-    if(d>=start && d<=end) el.classList.add("fertile");
-    if(key(d)===key(ov)) el.classList.add("ovulation");
-    if(key(d)===key(base)) el.classList.add("period");
-
-    $("days").appendChild(el);
-  }
-}
-
-$("calc").onclick=function(){
-  const raw=$("last").value;
-  const cycle=parseInt($("length").value,10);
-
-  $("err").style.display="none";
-  $("result").style.display="none";
-
-  if(!raw){
-    $("err").textContent="من فضلك اختاري أول يوم من آخر دورة.";
-    $("err").style.display="block";
-    return;
-  }
-
-  if(isNaN(cycle)||cycle<21||cycle>40){
-    $("err").textContent="متوسط طول الدورة خاصو يكون بين 21 و40 يوم.";
-    $("err").style.display="block";
-    return;
-  }
-
-  const a=raw.split("-");
-  const base=new Date(+a[0],+a[1]-1,+a[2],12);
-  const next=add(base,cycle);
-
-  // تقدير مبسط: التبويض ≈ 14 يوماً قبل الدورة التالية.
-  const ov=add(next,-14);
-
-  // نافذة تقريبية: 5 أيام قبل التبويض حتى يوم بعده.
-  const fs=add(ov,-5);
-  const fe=add(ov,1);
-
-  // أعلى احتمال تقريبي: اليومان السابقان للتبويض ويوم التبويض.
-  const bs=add(ov,-2);
-
-  $("ovu").textContent=fmt(ov);
-  $("fertile").textContent=fmt(fs)+"  →  "+fmt(fe);
-  $("best").textContent=fmt(bs)+"  →  "+fmt(ov);
-  $("next").textContent=fmt(next);
-
-  renderCalendar(base,fs,ov,fe);
-
-  $("result").style.display="block";
-  $("result").scrollIntoView({behavior:"smooth",block:"start"});
-};
-
-$("again").onclick=function(){
-  $("result").style.display="none";
-  $("last").focus();
-  window.scrollTo({top:0,behavior:"smooth"});
-};
-
-$("share").onclick=async function(){
-  const shareData={
-    title:"حاسبة أيام التبويض - Alloinfirmiere الطب البسيط",
-    text:"🥚 احسبي موعد التبويض ونافذة الخصوبة بشكل تقديري.",
-    url:window.location.href
-  };
-
-  try{
-    if(navigator.share){
-      await navigator.share(shareData);
-    }else{
-      await navigator.clipboard.writeText(window.location.href);
-      $("toast").style.display="block";
-      setTimeout(()=>$("toast").style.display="none",2200);
-    }
-  }catch(e){}
-};
+const $=id=>document.getElementById(id);let regularity=null,goal=null;
+function setChoice(a,b,value,type){$(a).classList.add("active");$(b).classList.remove("active");if(type==="regularity")regularity=value;if(type==="goal")goal=value}
+$("regularYes").onclick=()=>setChoice("regularYes","regularNo","yes","regularity");
+$("regularNo").onclick=()=>setChoice("regularNo","regularYes","no","regularity");
+$("goalPregnancy").onclick=()=>setChoice("goalPregnancy","goalTracking","pregnancy","goal");
+$("goalTracking").onclick=()=>setChoice("goalTracking","goalPregnancy","tracking","goal");
+function add(d,n){let x=new Date(d);x.setDate(x.getDate()+n);return x}
+function key(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function fmt(d){return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear()}
+function renderCalendar(base,start,ov,end){const first=new Date(ov.getFullYear(),ov.getMonth(),1,12),last=new Date(ov.getFullYear(),ov.getMonth()+1,0,12);$("monthTitle").textContent=ov.toLocaleDateString("ar-MA",{month:"long",year:"numeric"});$("days").innerHTML="";for(let i=0;i<first.getDay();i++){let e=document.createElement("div");e.className="day empty";$("days").appendChild(e)}for(let n=1;n<=last.getDate();n++){let d=new Date(ov.getFullYear(),ov.getMonth(),n,12),el=document.createElement("div");el.className="day";el.textContent=n;if(d>=start&&d<=end)el.classList.add("fertile");if(key(d)===key(ov))el.classList.add("ovulation");if(key(d)===key(base))el.classList.add("period");$("days").appendChild(el)}}
+$("calc").onclick=function(){const raw=$("last").value,cycle=parseInt($("length").value,10);$("err").style.display="none";$("result").style.display="none";
+if(!raw){$("err").textContent="من فضلك اختاري أول يوم من آخر دورة.";$("err").style.display="block";return}
+if(isNaN(cycle)||cycle<21||cycle>40){$("err").textContent="متوسط طول الدورة خاصو يكون بين 21 و40 يوم.";$("err").style.display="block";return}
+if(!regularity){$("err").textContent="اختاري واش الدورة منتظمة غالباً أم لا.";$("err").style.display="block";return}
+if(!goal){$("err").textContent="اختاري الهدف: محاولة الحمل أو تتبع الخصوبة.";$("err").style.display="block";return}
+const a=raw.split("-"),base=new Date(+a[0],+a[1]-1,+a[2],12),next=add(base,cycle),ov=add(next,-14),fs=add(ov,-5),fe=add(ov,1),bs=add(ov,-2);
+$("ovu").textContent=fmt(ov);$("fertile").textContent=fmt(fs)+"  →  "+fmt(fe);$("best").textContent=fmt(bs)+"  →  "+fmt(ov);$("next").textContent=fmt(next);
+if(regularity==="yes"){$("regularityStatus").className="status good";$("regularityStatus").textContent="✅ بما أن دورتك منتظمة غالباً، الحساب بالتقويم قد يكون مفيداً كتقدير، لكنه لا يحدد يوم التبويض بدقة 100%."}else{$("regularityStatus").className="status caution";$("regularityStatus").textContent="⚠️ بما أن دورتك غير منتظمة، اعتبري هذه التواريخ تقريبية أكثر. التبويض قد يتغير بشكل واضح من دورة لأخرى."}
+$("goalStatus").textContent=goal==="pregnancy"?"🤰 هدفك: محاولة الحمل. ركزي خصوصاً على نافذة الخصوبة، وأعلى فرصة تكون عادة في الأيام القريبة من التبويض.":"📅 هدفك: تتبع الخصوبة. استعملي النتيجة كمرجع تقريبي لمتابعة نمط دورتك، وليس كوسيلة وحيدة لمنع الحمل.";
+renderCalendar(base,fs,ov,fe);$("result").style.display="block";$("result").scrollIntoView({behavior:"smooth",block:"start"})};
+$("again").onclick=function(){$("result").style.display="none";$("last").focus();window.scrollTo({top:0,behavior:"smooth"})};
+$("share").onclick=async function(){const data={title:"حاسبة أيام التبويض - Alloinfirmiere الطب البسيط",text:"🥚 احسبي موعد التبويض ونافذة الخصوبة بشكل تقديري.",url:window.location.href};try{if(navigator.share)await navigator.share(data);else{await navigator.clipboard.writeText(window.location.href);$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2200)}}catch(e){}};
 })();
 </script>
 </body>
